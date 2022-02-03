@@ -29,8 +29,9 @@ COPY gluster-setup.sh gluster-brickmultiplex.service gluster-brickmultiplex.sh g
 COPY gluster-fake-disk.service /etc/systemd/system/gluster-fake-disk.service
 COPY fake-disk.sh /usr/libexec/gluster/fake-disk.sh
 
+RUN sed -i "s/LANG/\#LANG/g" /etc/locale.conf
+
 RUN dnf -y update && \
-    sed -i "s/LANG/\#LANG/g" /etc/locale.conf && \
     dnf -y install systemd-udev glusterfs-server python3-dbus nfs-utils attr iputils iproute glusterfs-geo-replication openssh-server openssh-clients cronie tar rsync sos xfsprogs && \
     dnf clean all && \
     sed -i '/Port 22/c\Port 2222' /etc/ssh/sshd_config && \
