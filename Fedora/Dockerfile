@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:latest
+FROM fedora:35
 
 ENV NAME="gluster-fedora" \
     DESC="GlusterFS on Fedora" \
