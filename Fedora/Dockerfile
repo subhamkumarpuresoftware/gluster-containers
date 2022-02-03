@@ -1,4 +1,4 @@
-FROM fedora:35
+FROM fedora:33
 
 ENV NAME="gluster-fedora" \
     DESC="GlusterFS on Fedora" \
