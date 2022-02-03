@@ -19,7 +19,7 @@ LABEL architecture="x86_64" \
       description="gluster-swift image is based on centos image which enables files and directories created on GlusterFS to be accessed as objects via the Swift and S3 API." \
       io.openshift.tags="gluster,glusterfs,gluster-swift"
 
-RUN yum -v --setopt=tsflags=nodocs -y update && \
+RUN yum -y update && \
     yum -v --setopt=tsflags=nodocs -y install centos-release-openstack-queens && \
     yum -v --setopt=tsflags=nodocs -y install epel-release && \
     yum -v --setopt=tsflags=nodocs -y install \
