@@ -6,7 +6,13 @@ addons:
     - sourceline: 'deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse'
     packages:
     - shellcheck
-
+jobs:
+  include:
+   - os: linux
+     arch: amd64
+   - os: linux
+     arch: arm64
+     
 services:
   - docker
 
