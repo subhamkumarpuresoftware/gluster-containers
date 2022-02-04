@@ -25,8 +25,13 @@ services:
   - docker
 
 before_install:
-# - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-# - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+- if [ "${TRAVIS_CPU_ARCH}" == "arm64" ]; then
+      arch='arm64' ;
+    else
+      arch='amd64';
+    fi
+- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+- sudo add-apt-repository "deb $arch https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 - sudo apt-get update
 - sudo apt-get -y install docker-ce/
 - docker build -t gluster/centos ./CentOS/
