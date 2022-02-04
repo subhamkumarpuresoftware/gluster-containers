@@ -1,3 +1,16 @@
+language: minimal
+
+branches:
+  only: 
+    - master
+
+jobs:
+  include:
+   - os: linux
+     arch: amd64
+   - os: linux
+     arch: arm64
+     
 sudo: true
 
 addons:
@@ -6,12 +19,6 @@ addons:
     - sourceline: 'deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse'
     packages:
     - shellcheck
-jobs:
-  include:
-   - os: linux
-     arch: amd64
-   - os: linux
-     arch: arm64
      
 services:
   - docker
@@ -20,9 +27,7 @@ before_install:
 - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 - sudo apt-get update
-- sudo apt-get -y install docker-ce
-# - docker build -t gluster/client ./gluster-client/
-# - docker run -it --name client gluster/client rpm -qa | grep gluster
+- sudo apt-get -y install docker-ce/
 - docker build -t gluster/centos ./CentOS/
 - docker run -d --name gcentos --privileged gluster/centos
 - sleep 10
