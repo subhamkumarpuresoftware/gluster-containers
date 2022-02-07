@@ -1,4 +1,4 @@
-FROM fedora:latest
+FROM fedora:33
 
 MAINTAINER Humble Devassy Chirammal  <hchiramm@redhat.com>
 
