@@ -6,12 +6,12 @@ jobs:
      arch: arm64
 sudo: true
 
-addons:
-  apt:
-    sources:
-    - sourceline: 'deb http://archive.ubuntu.com/ubuntu xenial-backports main restricted universe multiverse'
-    packages:
-    - shellcheck
+# addons:
+#   apt:
+#     sources:
+#     - sourceline: 'deb http://archive.ubuntu.com/ubuntu xenial-backports main restricted universe multiverse'
+#     packages:
+#     - shellcheck
 
 services:
   - docker
