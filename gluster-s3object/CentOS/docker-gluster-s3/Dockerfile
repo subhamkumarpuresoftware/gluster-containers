@@ -21,8 +21,8 @@ LABEL architecture="x86_64" \
 
 RUN yum -y update && \
     yum -v --setopt=tsflags=nodocs -y install centos-release-openstack-queens && \
-    yum -v --setopt=tsflags=nodocs -y install epel-release && \
-    yum -v --setopt=tsflags=nodocs -y install \
+    yum -v --setopt=tsflags=nodocs -y install epel-release python && \
+    yum -v --setopt=tsflags=nodocs -y install --skip-broken\
         openstack-swift openstack-swift-{proxy,account,container,object,plugin-swift3} \
         git memcached python-prettytable python-setuptools && \
     yum -y install systemd && \
