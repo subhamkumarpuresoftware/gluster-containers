@@ -22,11 +22,11 @@ before_install:
 - sudo apt-get update
 # - sudo apt-get -y install docker-ce
 - sudo docker build -t gluster/client ./gluster-client/
-- sudo docker run -T --name client gluster/client rpm -qa | grep gluster
+- sudo docker run -d --name client gluster/client rpm -qa | grep gluster
 - sudo docker build -t gluster/centos ./CentOS/
 - sudo docker run -d --name gcentos --privileged gluster/centos
 - sleep 10
-- sudo docker exec -T gcentos systemctl is-active glusterd
+- sudo docker exec -d gcentos systemctl is-active glusterd
 - sudo docker stop gcentos
 - sudo docker rm gcentos
 - sudo mkdir -p /home/centos-glusterd
