@@ -24,7 +24,7 @@ before_install:
 - sudo docker build -t gluster/client ./gluster-client/
 - sudo docker run --name client gluster/client rpm -qa | grep gluster
 - sudo docker build -t gluster/centos ./CentOS/
-- sudo docker run -d --name gcentos --privileged gluster/centos
+- sudo docker run -d --name gcentos gluster/centos
 - sleep 10
 - sudo docker exec gcentos systemctl is-active glusterd
 - sudo docker stop gcentos
