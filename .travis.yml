@@ -32,7 +32,7 @@ before_install:
 - sudo mkdir -p /home/centos-glusterd
 - sudo mkdir -p /home/centos-gluster-etc
 - sudo mkdir -p /home/centos-gluster-log
-- docker run -d --name gcentos -v /home/centos-glusterd:/var/lib/glusterd/:z -v /home/centos-gluster-etc:/etc/glusterfs:z -v /home/centos-gluster-log:/var/log/glusterfs --privileged gluster/centos
+- sudo docker run -d --name gcentos -v /home/centos-glusterd:/var/lib/glusterd/:z -v /home/centos-gluster-etc:/etc/glusterfs:z -v /home/centos-gluster-log:/var/log/glusterfs --privileged gluster/centos
 - sleep 10
 - sudo docker exec -it gcentos systemctl is-active glusterd
 - sudo docker stop gcentos
