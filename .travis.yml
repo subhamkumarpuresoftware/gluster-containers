@@ -43,7 +43,7 @@ before_install:
 - sudo docker stop gcentos
 - sudo docker rm gcentos
 - sudo docker build -t gluster/fedora ./Fedora/
-- sudo docker run --name gfedora --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro gluster/fedora
+- sudo docker run --name gfedora -v /sys/fs/cgroup:/sys/fs/cgroup:ro --privileged gluster/fedora
 - sleep 10
 - sudo docker exec gfedora systemctl is-active glusterd
 - sudo docker stop gfedora
