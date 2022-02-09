@@ -9,7 +9,7 @@ sudo: true
 addons:
   apt:
     sources:
-    - sourceline: 'deb http://us.archive.ubuntu.com/ubuntu/ bionic main restricted universe multiverse'
+    - sourceline: 'deb http://us.archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse'
     packages:
     - shellcheck
 
