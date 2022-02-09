@@ -9,7 +9,7 @@ sudo: true
 addons:
   apt:
     sources:
-    - sourceline: 'deb http://us.archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse'
+    - sourceline: 'deb http://us.archive.ubuntu.com/ubuntu/ focal-backports main restricted universe multiverse'
     packages:
     - shellcheck
 
@@ -26,18 +26,18 @@ before_install:
 # - sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'
 - sudo apt-get update
 - sudo apt-get -y install docker-ce
-- sudo docker build -t gluster/client ./gluster-client/
-- sudo docker run --name client gluster/client rpm -qa | grep gluster
-- sudo docker build -t gluster/centos ./CentOS/
-- sudo docker run -d --name gcentos --privileged gluster/centos
+- docker build -t gluster/client ./gluster-client/
+- docker run -it --name client gluster/client rpm -qa | grep gluster
+- docker build -t gluster/centos ./CentOS/
+- docker run -d --name gcentos --privileged gluster/centos
 - sleep 10
-- sudo docker exec gcentos systemctl is-active glusterd
-- sudo docker stop gcentos
-- sudo docker rm gcentos
+- docker exec -it gcentos systemctl is-active glusterd
+- docker stop gcentos
+- docker rm gcentos
 - sudo mkdir -p /home/centos-glusterd
 - sudo mkdir -p /home/centos-gluster-etc
 - sudo mkdir -p /home/centos-gluster-log
-- sudo docker run --name gcentos -v /home/centos-glusterd:/var/lib/glusterd/:z -v /home/centos-gluster-etc:/etc/glusterfs:z -v /home/centos-gluster-log:/var/log/glusterfs --privileged gluster/centos
+- docker run -d --name gcentos -v /home/centos-glusterd:/var/lib/glusterd/:z -v /home/centos-gluster-etc:/etc/glusterfs:z -v /home/centos-gluster-log:/var/log/glusterfs --privileged gluster/centos
 - sleep 10
 - sudo docker exec gcentos systemctl is-active glusterd
 - sudo docker stop gcentos
