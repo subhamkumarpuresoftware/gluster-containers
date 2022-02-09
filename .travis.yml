@@ -6,12 +6,12 @@ jobs:
      arch: arm64
 sudo: true
 
-addons:
-  apt:
-    sources:
-    - sourceline: 'deb http://us.archive.ubuntu.com/ubuntu/ focal-backports main restricted universe multiverse'
-    packages:
-    - shellcheck
+# addons:
+#   apt:
+#     sources:
+#     - sourceline: 'deb http://us.archive.ubuntu.com/ubuntu/ focal-backports main restricted universe multiverse'
+#     packages:
+#     - shellcheck
 
 services:
   - docker
@@ -51,13 +51,13 @@ before_install:
 - sudo mkdir -p /home/fedora-glusterd
 - sudo mkdir -p /home/fedora-gluster-etc
 - sudo mkdir -p /home/fedora-gluster-log
-- sudo docker run --name gfedora -v /home/fedora-glusterd:/var/lib/glusterd/:z -v /home/fedora-gluster-etc:/etc/glusterfs:z -v /home/fedora-gluster-log:/var/log/glusterfs -v /sys/fs/cgroup:/sys/fs/cgroup:ro --privileged gluster/fedora
+- sudo docker run -d --name gfedora -v /home/fedora-glusterd:/var/lib/glusterd/:z -v /home/fedora-gluster-etc:/etc/glusterfs:z -v /home/fedora-gluster-log:/var/log/glusterfs -v /sys/fs/cgroup:/sys/fs/cgroup:ro --privileged gluster/fedora
 - sleep 10
 - sudo docker exec gfedora systemctl is-active glusterd
 - sudo docker stop gfedora
 - sudo docker rm gfedora
 - sudo docker build -t gluster/s3object ./gluster-s3object/CentOS/docker-gluster-s3/
-- sudo docker run --name s3object --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro -e S3_ACCOUNT=vol -e S3_USER="admin" -e S3_PASSWORD="redhat" gluster/s3object
+- sudo docker run -d --name s3object --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro -e S3_ACCOUNT=vol -e S3_USER="admin" -e S3_PASSWORD="redhat" gluster/s3object
 - sleep 10
 - sudo docker exec s3object systemctl is-active swift-object
 
