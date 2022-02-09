@@ -15,19 +15,22 @@ sudo: true
 
 services:
   - docker
+  
+dist: focal
 
 before_install:
-# - if [ "${TRAVIS_CPU_ARCH}" == "arm64" ]; then
-#       arch='arm64' ;
-#   else
-#       arch='amd64';
-#   fi
+- if [ "${TRAVIS_CPU_ARCH}" == "arm64" ]; then
+      arch='arm64' ;
+  else
+      arch='amd64';
+  fi
 - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 # - sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'
+- echo 'deb [arch=$(arch)] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'
 - sudo apt-get update
-# - sudo apt-get -y install docker-ce
+- sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 - docker build -t gluster/client ./gluster-client/
-# - docker run -d --name client gluster/client rpm -qa | grep gluster
+- docker run -d --name client gluster/client rpm -qa | grep gluster
 - docker build -t gluster/centos ./CentOS/
 - docker run -d --name gcentos --privileged gluster/centos
 - sleep 10
