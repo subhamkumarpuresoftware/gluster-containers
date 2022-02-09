@@ -27,7 +27,7 @@ before_install:
 - sudo apt-get update
 # - sudo apt-get -y install docker-ce
 - docker build -t gluster/client ./gluster-client/
-- docker run -d --name client gluster/client rpm -qa | grep gluster
+# - docker run -d --name client gluster/client rpm -qa | grep gluster
 - docker build -t gluster/centos ./CentOS/
 - docker run -d --name gcentos --privileged gluster/centos
 - sleep 10
