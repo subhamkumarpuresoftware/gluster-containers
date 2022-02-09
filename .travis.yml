@@ -1,7 +1,7 @@
 jobs:
   include:
-#    - os: linux
-#      arch: amd64
+   - os: linux
+     arch: amd64
    - os: linux
      arch: arm64
 sudo: true
@@ -26,7 +26,7 @@ before_install:
 - sudo docker build -t gluster/centos ./CentOS/
 - sudo docker run -d --name gcentos gluster/centos
 - sleep 10
-# - sudo docker exec gcentos systemctl is-active glusterd
+- sudo docker exec gcentos systemctl is-active glusterd
 - sudo docker stop gcentos
 - sudo docker rm gcentos
 - sudo mkdir -p /home/centos-glusterd
