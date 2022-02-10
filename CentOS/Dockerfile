@@ -4,10 +4,8 @@ MAINTAINER Humble Chirammal hchiramm@redhat.com Saravanakumar Arumugam sarumuga@
 
 ENV container docker
 
-ENV ARCH "x86_64"
-
-RUN if [ `uname -m` = "aarch64" ] ; then \
-       ARCH="arm64"; 
+# ENV ARCH "x86_64"
+ENV ARCH=if `uname -m` -eq "aarch64"; then echo "arm64"; else echo "x86_64"; fi
     
 LABEL architecture="$ARCH" \
       name="gluster/gluster-centos" \
