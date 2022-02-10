@@ -10,13 +10,12 @@ services:
   - docker
 
 before_install:
-- sudo su
 - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 - sudo apt-get update
 - docker build -t gluster/client ./gluster-client/
 - sudo docker run -i --name client gluster/client rpm -qa | grep gluster
 - docker build -t gluster/centos ./CentOS/
-- docker run -d --name gcentos --privileged gluster/centos
+- sudo docker run -d --name gcentos --privileged gluster/centos
 - sleep 10
 - docker exec -it gcentos systemctl is-active glusterd
 - docker stop gcentos
