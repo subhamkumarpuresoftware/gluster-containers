@@ -5,14 +5,18 @@ MAINTAINER Humble Chirammal hchiramm@redhat.com Saravanakumar Arumugam sarumuga@
 ENV container docker
 
 ENV ARCH "x86_64"
+
+RUN if [ `uname -m` = "aarch64" ] ; then \
+       ARCH="arm64"; 
+    
 LABEL architecture="$ARCH" \
       name="gluster/gluster-centos" \
       version="latest" \
       vendor="CentOS Community" \
       summary="This image has a running glusterfs service (CentOS 7 + latest Gluster)" \
       io.k8s.display-name="Gluster server based on CentOS 7" \
-      io.k8s.description="Gluster Image is based on CentOS Image which is a scalable network filesystem. Using common off-the-shelf hardware, >
-      description="Gluster Image is based on CentOS Image which is a scalable network filesystem. Using common off-the-shelf hardware, you can>
+      io.k8s.description="Gluster Image is based on CentOS Image which is a scalable network filesystem. Using common off-the-shelf hardware, you can create large, distributed storage solutions for media streaming, data analysis, and other data- and bandwidth-intensive tasks." \
+      description="Gluster Image is based on CentOS Image which is a scalable network filesystem. Using common off-the-shelf hardware, you can create large, distributed storage solutions for media streaming, data analysis, and other data- and bandwidth-intensive tasks." \
       io.openshift.tags="gluster,glusterfs,glusterfs-centos"
 
 RUN yum --setopt=tsflags=nodocs -y update && yum install -y centos-release-gluster && yum clean all && \
